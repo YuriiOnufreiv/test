@@ -20,21 +20,23 @@ pipeline {
                 // sh 'chmod 777 data/elasticsearch'
                 // sh 'docker compose -p reportportal up -d'
             }
+          
         }
         stage('Hello') {
             steps {
                 echo 'Hello World'
                 step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: []]])
+              setBuildStatus("Build complete", "SUCCESS");
             }
         }
     }
     
-  post {
-    success {
-        setBuildStatus("Build succeeded", "SUCCESS");
-    }
-    failure {
-        setBuildStatus("Build failed", "FAILURE");
-    }
-  }
+//   post {
+//     success {
+//         setBuildStatus("Build succeeded", "SUCCESS");
+//     }
+//     failure {
+//         setBuildStatus("Build failed", "FAILURE");
+//     }
+//   }
 }
