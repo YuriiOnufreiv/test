@@ -1,3 +1,13 @@
+void setBuildStatus(String message, String state) {
+  step([
+      $class: "GitHubCommitStatusSetter",
+      reposSource: [$class: "ManuallyEnteredRepositorySource", url: "https://github.com/YuriiOnufreiv/test"],
+      contextSource: [$class: "ManuallyEnteredCommitContextSource", context: "qqq"],
+      errorHandlers: [[$class: "ChangingBuildStatusErrorHandler", result: "UNSTABLE"]],
+      statusResultSource: [ $class: "ConditionalStatusResultSource", results: [[$class: "AnyBuildResult", message: message, state: state]] ]
+  ]);
+}
+
 pipeline {
     agent any
 
@@ -10,11 +20,23 @@ pipeline {
                 // sh 'chmod 777 data/elasticsearch'
                 // sh 'docker compose -p reportportal up -d'
             }
+          
         }
         stage('Hello') {
             steps {
                 echo 'Hello World'
+                step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: []]])
+              setBuildStatus("Build complete", "SUCCESS");
             }
         }
     }
+    
+  post {
+    success {
+        setBuildStatus("Build succeeded", "SUCCESS");
+    }
+    failure {
+        setBuildStatus("Build failed", "FAILURE");
+    }
+  }
 }
