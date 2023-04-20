@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                eewrcho 'Hello World from build'
+                echo 'Hello World from build'
 //                 git branch: 'main', credentialsId: '', url: 'https://github.com/YuriiOnufreiv/test'
                 // sh 'mkdir -p data/elasticsearch'
                 // sh 'chmod 777 data/elasticsearch'
