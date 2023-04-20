@@ -1,0 +1,7 @@
+organization=test-yo
+projectKey=test-yo
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.40146
+dashboardUrl=https://sonarcloud.io/dashboard?id=test-yo
+ceTaskId=AYee6-cnR5SBU0I4cUvK
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AYee6-cnR5SBU0I4cUvK
