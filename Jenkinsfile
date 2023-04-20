@@ -27,7 +27,11 @@ pipeline {
                 echo 'Hello World'
 //                 step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: []]])
 //               setBuildStatus("Build complete", "SUCCESS");
-                sh "./gradlew sonar"
+
+                  withSonarQubeEnv('SonarCloud') {
+                    sh "./gradlew sonar"
+                  }
+                waitForQualityGate abortPipeline: true
             }
         }
     }
