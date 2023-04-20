@@ -25,8 +25,8 @@ pipeline {
         stage('Hello') {
             steps {
                 echo 'Hello World'
-                step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: []]])
-              setBuildStatus("Build complete", "SUCCESS");
+//                 step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: []]])
+//               setBuildStatus("Build complete", "SUCCESS");
             }
         }
     }
